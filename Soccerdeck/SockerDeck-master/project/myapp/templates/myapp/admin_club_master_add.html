@@ -1,0 +1,71 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}Club Details Add{% endblock %}
+{% block body %}
+<center>
+    <h1>Club Details Add</h1>
+    <div class="container">
+        <form role="form" name="frm" action="{% url 'admin_club_master_add' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="club_name">Name :</label>
+                <input class="form-control" type="text" name="club_name" id="club_name" value="{{ club_name }}">
+                {% if msg.club_name %}<small class="text-danger">{{ msg.club_name }}</small>{% endif %}
+            </div>
+            <div class="form-group">
+                <label for="document">Image :</label>
+                <input class="form-control" type="file" name="document" id="document">
+                {% if msg.document %}<small class="text-danger">{{ msg.document }}</small>{% endif %}
+            </div>
+            <div class="form-group">
+                <label for="c_descp">Description :</label>
+                <textarea class="form-control" name="c_descp" id="c_descp">{{ c_descp }}</textarea>
+                {% if msg.c_descp %}<small class="text-danger">{{ msg.c_descp }}</small>{% endif %}
+            </div>
+            <div class="form-group">
+                <label for="addr">Address :</label>
+                <textarea class="form-control" name="addr" id="addr">{{ addr }}</textarea>
+                {% if msg.addr %}<small class="text-danger">{{ msg.addr }}</small>{% endif %}
+            </div>
+            <div class="form-group">
+                <label for="owner_details">Owner Details :</label>
+                <textarea class="form-control" name="owner_details" id="owner_details">{{ owner_details }}</textarea>
+                {% if msg.owner_details %}<small class="text-danger">{{ msg.owner_details }}</small>{% endif %}
+            </div>
+            <div class="form-group">
+                <label for="url">URL :</label>
+                <input class="form-control" type="text" name="url" id="url" value="{{ url }}">
+                {% if msg.url %}<small class="text-danger">{{ msg.url }}</small>{% endif %}
+            </div>
+            <div class="form-group">
+                <label for="uname">User Name :</label>
+                <input class="form-control" type="text" name="uname" id="uname" value="{{ uname }}">
+                {% if msg.uname %}<small class="text-danger">{{ msg.uname }}</small>{% endif %}
+            </div>
+            <div class="form-group">
+                <label for="password">Password :</label>
+                <input class="form-control" type="password" name="password" id="password">
+                {% if msg.password %}<small class="text-danger">{{ msg.password }}</small>{% endif %}
+            </div>
+            <button type="submit" class="btn btn-info" id="bt" name="bt">Add</button>
+            <button type="reset" class="btn btn-info" id="rt" name="rt">Clear</button>
+        </form>
+    </div>
+
+    {% if success %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: 'Club created successfully!',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "{% url 'admin_club_master_view' %}";  // Replace with your actual login URL
+            }
+        });
+    </script>
+    {% endif %}
+</center>
+{% endblock %}

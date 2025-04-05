@@ -1,0 +1,46 @@
+{% extends 'myapp/club_base.html' %}
+{% load static %}
+{% block title %}Player Evaluation Details{% endblock %}
+{% block body %}
+<style>
+.tablecenterheadCSS th{
+	text-align:center;
+}
+.tablecenterheadCSS td{
+	text-align:center;
+}
+</style>
+<center>
+    <h2><font color="#366092">History List</font></h2>
+<div class="container">
+    <form name="frm" action="" method="post">
+            {% csrf_token %}
+         <table class="tablecenterheadCSS table table-hover table-bordered table-sm">
+        <thead>
+             <tr>
+            <th>Input</th>
+            <th>Value</th>
+            <th>Overall</th>
+            <th>Date/Time</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        {% for b in search_list %}
+             <tbody>
+        <tr class="info ">
+            <td>{{ b.age }},{{ b.height_cm }},{{ b.weight_kg }},{{ b.overall }},{{ b.weak_foot }},{{ b.skill_moves }},{{ b.attacking_crossing }},{{ b.attacking_finishing }},{{ b.attacking_heading_accuracy }},{{ b.attacking_short_passing }}..</td>
+            <td>{{ b.estimate }}</td>
+            <td>{{ b.overall }}</td>
+            <td>{{ b.dt }}/{{ b.tm }}</td>
+            <td><a class="nav-link" href="../club_query_delete?id={{b.id}}">Delete</a></td>
+        </tr>
+             </tbody>
+        {% endfor %}
+        </table>
+        <br/>
+
+
+    </form>
+</div>
+</center>
+{% endblock %}

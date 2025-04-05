@@ -1,0 +1,91 @@
+{% extends 'myapp/club_base.html' %}
+{% load static %}
+
+{% block title %}Club Dashboard{% endblock %}
+
+{% block body %}
+<style>
+    body {
+        background-image: url("{% static 'myapp/images/bg.jpeg' %}");
+        background-size: cover;
+        background-position: center;
+        color: #333;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    div.main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 2rem;
+        padding: 20px;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.9); /* Light background for readability */
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+        font-size: 2.5rem;
+        color: #d9534f; /* Bootstrap danger color */
+        margin-bottom: 10px;
+    }
+    p {
+        font-size: 1.2rem;
+        color: #555;
+        margin-bottom: 1.5rem;
+    }
+    .dashboard-cards {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        max-width: 1200px;
+        margin-top: 20px;
+        flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+    }
+    .card {
+        flex: 1 1 300px; /* Allow cards to grow/shrink, with a minimum width */
+        margin: 1rem;
+        padding: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        border-radius: 10px;
+        background-color: white;
+        transition: transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
+    }
+    .card:hover {
+        transform: translateY(-5px); /* Slight lift on hover */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .card h5 {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 0.5rem; /* Space between heading and value */
+    }
+    .card h1 {
+        font-size: 3rem;
+        color: #007bff; /* Bootstrap primary color */
+        margin: 0; /* Remove default margin */
+    }
+</style>
+
+<div class="main">
+    <h1 class="text-danger">Welcome, {{ club }}!</h1>
+    <h6>{{ club_details.c_descp }}</h6>
+    <!-- Dashboard Cards Section -->
+    <div class="dashboard-cards">
+        <!-- Card for Player Count -->
+        <div class="card">
+            <h5>Total Players in Club</h5>
+            <h1>{{ player_count }}</h1>
+        </div>
+        <!-- Card for Queries Made -->
+        <div class="card">
+            <h5>Total Queries Made</h5>
+            <h1>{{ query_count }}</h1>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

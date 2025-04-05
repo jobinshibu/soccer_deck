@@ -1,0 +1,52 @@
+{% extends 'myapp/club_base.html' %}
+{% load static %}
+{% block title %}Player Club Details{% endblock %}
+{% block body %}
+<style>
+.tablecenterheadCSS th{
+	text-align:center;
+}
+.tablecenterheadCSS td{
+	text-align:center;
+}
+</style>
+
+<center>
+
+    <h1>Player Club Details</h1>
+    <div class="container">
+    <form role="form" name="frm" action="{% url 'club_player_club_history_view'%}" method="post">
+        {% csrf_token %}
+        <div class="table-responsive-lg">
+        <table class="tablecenterheadCSS table table-hover table-bordered table-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>From Date</th>
+                <th>To Date</th>
+
+            </tr>
+            </thead>
+            {% for cm in club_list %}
+            <tbody>
+            <tr>
+                <td>{{ cm.id }}</td>
+                <td>{{ cm.curr_status }}</td>
+                <td>{{ cm.descp}}</td>
+                <td>{{ cm.fr_dt}}</td>
+                <td>{{ cm.to_dt}}</td>
+
+            </tr>
+            <tbody>
+            {% endfor %}
+        </table>
+        </div>
+
+    </form>
+    </div>
+    <b>{{msg}}</b>
+</center>
+
+{% endblock %}

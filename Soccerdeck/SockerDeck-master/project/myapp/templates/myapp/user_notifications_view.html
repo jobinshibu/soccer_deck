@@ -1,0 +1,36 @@
+{% extends 'myapp/user_base.html' %}
+{% load static %}
+{% block title %}Player Details{% endblock %}
+{% block body %}
+<div class="container">
+    <h1 class="mt-5">Notifications</h1> 
+    <table class="tablecenterheadCSS table table-hover table-bordered table-md">
+        <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Heading</th>
+            <th>Content</th>
+            <!-- <th>URL</th> -->
+            <th>Date Created</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for item in notifications %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ item.heading }}</td>
+                <td>{{ item.content }}</td>
+                <!-- <td>{{ item.url }}</td> -->
+                <td>{{ item.date_added }}</td>
+                <td>
+                    <a href="{{ item.url }}" target="_blank">
+                        <button class="btn btn-primary">Register</button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

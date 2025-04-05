@@ -1,0 +1,54 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}User Details{% endblock %}
+{% block body %}
+<style>
+.tablecenterheadCSS th{
+	text-align:center;
+}
+.tablecenterheadCSS td{
+	text-align:center;
+}
+</style>
+
+<center>
+    <h1>User Details</h1>
+    <div class="container">
+    <form role="form" name="frm" action="" method="post">
+        {% csrf_token %}
+        <div class="table-responsive-lg">
+        <table class="tablecenterheadCSS table table-hover table-bordered table-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            {% for cm in user_list %}
+            <tbody>
+            <tr>
+                <td>{{ cm.id }}</td>
+                <td>{{ cm.fname }} {{ cm.lname }}</td>
+                <td>{{ cm.gender }}</td>
+                <td>{{ cm.addr }}, {{ cm.pin }}</td>
+                <td>{{ cm.contact }}</td>
+                <td>{{ cm.email }}</td>
+                <td>
+                    <a class="btn btn-danger" href="../admin_user_detail_delete?id={{ cm.id }}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+        </div>
+    </form>
+    </div>
+    <b>{{ msg }}</b>
+</center>
+
+{% endblock %}

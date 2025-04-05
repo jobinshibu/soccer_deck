@@ -1,0 +1,67 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}Player Details{% endblock %}
+{% block body %}
+<style>
+.tablecenterheadCSS th {
+    text-align: center;
+}
+.tablecenterheadCSS td {
+    text-align: center;
+}
+</style>
+
+<center>
+    <h1>Player Details</h1>
+    <div class="container">
+        <form role="form" name="frm" action="{% url 'admin_player_info_view' %}" method="post">
+            {% csrf_token %}
+            <div class="table-responsive-lg">
+                <table class="tablecenterheadCSS table table-hover table-bordered table-md">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Country</th>
+                            <th>Image</th>
+                            <th>Description</th>
+                            <th>Age</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pi in player_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ pi.fname }} {{ pi.lname }}</td>
+                            <td>
+                                {% for k, value in country_list.items %}
+                                    {% if k == pi.country_id %}
+                                        {{ value }}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td><embed src="../static/myapp/media/{{ pi.pic_path }}" width="100" height="100"></embed></td>
+                            <td>{{ pi.descp }}</td>
+                            <td>{{ pi.age }}</td>
+                            <td>
+                                <a class="btn btn-info" href="../admin_player_club_history_view?player_id={{ pi.id }}">Club History</a> |
+                                <a class="btn btn-info" href="../admin_player_match_history_view?player_id={{ pi.id }}">Match History</a> |
+                                <a class="btn btn-danger" href="../admin_player_info_delete?id={{ pi.id }}">Delete</a> | 
+                                <a href="../admin_player_info_profile?id={{ pi.id }}">
+                                    <button type="button" class="btn btn-primary">View Info</button>
+                                </a> |
+                                <a class="btn btn-warning" href="../admin_player_info_edit/{{ pi.id }}">Edit</a> <!-- Edit button -->
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <a class="btn btn-primary" href="{% url 'admin_player_info_add' %}">Add Player Details</a>
+        </form>
+    </div>
+    <b>{{ msg }}</b>
+</center>
+
+{% endblock %}

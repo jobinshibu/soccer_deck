@@ -1,0 +1,49 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}Player Match Details Add{% endblock %}
+{% block body %}
+<center>
+    <h1>Player Match Details Add</h1>
+     <div class="container">
+    <form role="form" name="frm" action="{% url 'admin_player_match_history_add'%}" method="post" >
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="match_details">Match Details :</label>
+            <input class="form-control" type="text" name="match_details" id="match_details">
+        </div>
+         <div class="form-group">
+            <label for="venue">Venue :</label>
+            <textarea class="form-control" name="venue" id="venue"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="descp">Description :</label>
+            <textarea class="form-control" name="descp" id="descp"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="dt">Date :</label>
+            <input class="form-control" type="date" name="dt" id="dt">
+        </div>
+         <div class="form-group">
+            <label for="player_team">Team :</label>
+            <input class="form-control" type="text" name="player_team" id="player_team">
+        </div>
+        <div class="form-group">
+            <label for="player_no">Position :</label>
+            <input class="form-control" type="text" name="player_no" id="player_no">
+        </div>
+        <div class="form-group">
+            <label for="opp_team">Opp. Team :</label>
+            <input class="form-control" type="text" name="opp_team" id="opp_team">
+        </div>
+        <div class="form-group">
+            <label for="no_goals">Goals :</label>
+            <input class="form-control" type="text" name="no_goals" id="no_goals">
+        </div>
+        <input class="form-control" type="hidden" name="player_id" id="player_id" value="{{player_id}}">
+        <button type="submit" class="btn btn-info" id="bt" name="bt">Add</button>
+        <button type="reset" class="btn btn-info" id="rt" name="rt">Clear</button>
+    </form>
+     </div>
+    <h3>{{msg}}</h3>
+</center>
+{% endblock %}

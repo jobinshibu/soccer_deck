@@ -1,0 +1,233 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}Player Details Add{% endblock %}
+{% block body %}
+<center>
+    <h1 class="mt-2">Add Player Details</h1>
+     <div class="container">
+
+    
+    <form class="row" role="form" name="frm" action="{% url 'admin_player_info_add'%}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group col-lg-4">
+            <label for="fname">First Name :</label>
+            <input class="form-control" type="text" name="fname" id="fname" value="{{ request.POST.fname }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="lname">Last Name :</label>
+            <input class="form-control" type="text" name="lname" id="lname" value="{{ request.POST.lname }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="club">Club :</label>
+            <select class="form-control" id="club"  name="club">
+                {% for  club in clubs %}
+                <option value="{{club.id}}" {% if club.id == request.POST.club %}selected{% endif %}>{{club.club_name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="country_id">Country :</label>
+            <select class="form-control" id="country_id"  name="country_id">
+                {% for  c in country_list %}
+                <option value="{{c.id}}" {% if club.id == request.POST.country_id %}selected{% endif %}>{{c.country}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="document">Image :</label>
+            <input class="form-control" type="file" name="document" id="document" accept=".jpg, .jpeg, .png" required>
+        </div>
+
+        <div class="form-group col-lg-4">
+            <label for="descp">Description :</label>
+            <textarea class="form-control" name="descp" id="descp" required>{{ request.POST.descp }}</textarea>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="age">Age :</label>
+            <input class="form-control" type="number" min="1" max="100" name="age" id="age" value="{{ request.POST.age }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="height_cm">Height(Cm) :</label>
+            <input class="form-control" type="number" name="height_cm" id="height_cm" value="{{ request.POST.height_cm }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="weight_kg">Weight (Kg) :</label>
+            <input class="form-control" type="number" name="weight_kg" id="weight_kg" value="{{ request.POST.weight_kg }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="overall">Overall Score :</label>
+            <input class="form-control" type="number" min="1" max="100" name="overall" id="overall" value="{{ request.POST.overall }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="player_positions">Player Positions</label>
+            <input class="form-control" type="text" name="player_positions" id="player_positions" value="{{ request.POST.player_positions }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="weak_foot">Weak Foot :</label>
+            <input class="form-control" type="text" name="weak_foot" id="weak_foot" value="{{ request.POST.weak_foot }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="skill_moves">Skill Moves :</label>
+            <input class="form-control" type="number" min="1" max="100" name="skill_moves" id="skill_moves" value="{{ request.POST.skill_moves }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="attacking_crossing">Attacking Crossing :</label>
+            <input class="form-control" type="number" min="1" max="100" name="attacking_crossing" id="attacking_crossing" value="{{ request.POST.attacking_crossing }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="attacking_finishing">Attacking Finishing :</label>
+            <input class="form-control" type="number" min="1" max="100" name="attacking_finishing" id="attacking_finishing" value="{{ request.POST.attacking_finishing }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="attacking_heading_accuracy">Attacking Heading Accuracy :</label>
+            <input class="form-control" type="number" min="1" max="100" name="attacking_heading_accuracy" id="attacking_heading_accuracy" value="{{ request.POST.attacking_heading_accuracy }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="attacking_short_passing">Attacking Short Passing :</label>
+            <input class="form-control" type="number" min="1" max="100" name="attacking_short_passing" id="attacking_short_passing" value="{{ request.POST.attacking_short_passing }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="attacking_volleys">Attacking Volleys :</label>
+            <input class="form-control" type="number" min="1" max="100" name="attacking_volleys" id="attacking_volleys" value="{{ request.POST.attacking_volleys }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="skill_dribbling">Skill Dribbling :</label>
+            <input class="form-control" type="number" min="1" max="100" name="skill_dribbling" id="skill_dribbling" value="{{ request.POST.skill_dribbling }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="skill_curve">Skill Curve :</label>
+            <input class="form-control" type="number" min="1" max="100" name="skill_curve" id="skill_curve" value="{{ request.POST.skill_curve }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="skill_fk_accuracy">Skill Fk Accuracy :</label>
+            <input class="form-control" type="number" min="1" max="100" name="skill_fk_accuracy" id="skill_fk_accuracy" value="{{ request.POST.skill_fk_accuracy }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="skill_long_passing">Skill Long Passing :</label>
+            <input class="form-control" type="number" min="1" max="100" name="skill_long_passing" id="skill_long_passing" value="{{ request.POST.skill_long_passing }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="skill_ball_control">Skill Ball Control :</label>
+            <input class="form-control" type="number" min="1" max="100" name="skill_ball_control" id="skill_ball_control" value="{{ request.POST.skill_ball_control }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="movement_acceleration">Movement Acceleration :</label>
+            <input class="form-control" type="number" min="1" max="100" name="movement_acceleration" id="movement_acceleration" value="{{ request.POST.movement_acceleration }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="movement_sprint_speed">Movement Sprint Speed :</label>
+            <input class="form-control" type="number" min="1" max="100" name="movement_sprint_speed" id="movement_sprint_speed" value="{{ request.POST.movement_sprint_speed }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="movement_agility">Movement Agility :</label>
+            <input class="form-control" type="number" min="1" max="100" name="movement_agility" id="movement_agility" value="{{ request.POST.movement_agility }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="movement_reactions">Movement Reactions :</label>
+            <input class="form-control" type="number" min="1" max="100" name="movement_reactions" id="movement_reactions" value="{{ request.POST.movement_reactions }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="movement_balance">Movement Balance :</label>
+            <input class="form-control" type="number" min="1" max="100" name="movement_balance" id="movement_balance" value="{{ request.POST.movement_balance }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="power_shot_power">Power Shot Power :</label>
+            <input class="form-control" type="number" min="1" max="100" name="power_shot_power" id="power_shot_power" value="{{ request.POST.power_shot_power }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="power_jumping">Power Jumping :</label>
+            <input class="form-control" type="number" min="1" max="100" name="power_jumping" id="power_jumping" value="{{ request.POST.power_jumping }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="power_stamina">Power Stamina :</label>
+            <input class="form-control" type="number" min="1" max="100" name="power_stamina" id="power_stamina" value="{{ request.POST.power_stamina }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="power_strength">Power Strength :</label>
+            <input class="form-control" type="number" min="1" max="100" name="power_strength" id="power_strength" value="{{ request.POST.power_strength }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="power_long_shots">Power Long Shots :</label>
+            <input class="form-control" type="number" min="1" max="100" name="power_long_shots" id="power_long_shots" value="{{ request.POST.power_long_shots }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="mentality_aggression">Mentality Aggression :</label>
+            <input class="form-control" type="number" min="1" max="100" name="mentality_aggression" id="mentality_aggression" value="{{ request.POST.mentality_aggression }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="mentality_interceptions">Mentality Interceptions :</label>
+            <input class="form-control" type="number" min="1" max="100" name="mentality_interceptions" id="mentality_interceptions" value="{{ request.POST.mentality_interceptions }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="mentality_positioning">Mentality Positioning :</label>
+            <input class="form-control" type="number" min="1" max="100" name="mentality_positioning" id="mentality_positioning" value="{{ request.POST.mentality_positioning }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="mentality_vision">Mentality Vision :</label>
+            <input class="form-control" type="number" min="1" max="100" name="mentality_vision" id="mentality_vision" value="{{ request.POST.mentality_vision }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="mentality_penalties">Mentality Penalties :</label>
+            <input class="form-control" type="number" min="1" max="100" name="mentality_penalties" id="mentality_penalties" value="{{ request.POST.mentality_penalties }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="mentality_composure">Mentality Composure :</label>
+            <input class="form-control" type="number" min="1" max="100" name="mentality_composure" id="mentality_composure" value="{{ request.POST.mentality_composure }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="defending_marking">Defending Marking :</label>
+            <input class="form-control" type="number" min="1" max="100" name="defending_marking" id="defending_marking" value="{{ request.POST.defending_marking }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="defending_standing_tackle">Defending Standing Tackle :</label>
+            <input class="form-control" type="number" min="1" max="100" name="defending_standing_tackle" id="defending_standing_tackle" value="{{ request.POST.defending_standing_tackle }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="defending_sliding_tackle">Defending Sliding Tackle :</label>
+            <input class="form-control" type="number" min="1" max="100" name="defending_sliding_tackle" id="defending_sliding_tackle" value="{{ request.POST.defending_sliding_tackle }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="goalkeeping_diving">Goalkeeping Diving :</label>
+            <input class="form-control" type="number" min="1" max="100" name="goalkeeping_diving" id="goalkeeping_diving" value="{{ request.POST.goalkeeping_diving }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="goalkeeping_handling">Goalkeeping Handling :</label>
+            <input class="form-control" type="number" min="1" max="100" name="goalkeeping_handling" id="goalkeeping_handling" value="{{ request.POST.goalkeeping_handling }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="goalkeeping_kicking">Goalkeeping Kicking :</label>
+            <input class="form-control" type="number" min="1" max="100" name="goalkeeping_kicking" id="goalkeeping_kicking" value="{{ request.POST.goalkeeping_kicking }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="goalkeeping_positioning">Goalkeeping Positioning :</label>
+            <input class="form-control" type="number" min="1" max="100" name="goalkeeping_positioning" id="goalkeeping_positioning" value="{{ request.POST.goalkeeping_positioning }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="goalkeeping_reflexes">Goalkeeping Reflexes :</label>
+            <input class="form-control" type="number" min="1" max="100" name="goalkeeping_reflexes" id="goalkeeping_reflexes" value="{{ request.POST.goalkeeping_positioning }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="estimate">Estimate :</label>
+            <input class="form-control" type="number" name="estimate" id="estimate" value="{{ request.POST.estimate }}" required>
+        </div>
+        <div class="form-group col-lg-4">
+            <label for="price">Price :</label>
+            <input class="form-control" type="number" name="price" id="price" value="{{ request.POST.price }}" required>
+        </div>
+        <div class="col-lg-12">
+            <button type="submit" class="btn btn-info" id="bt" name="bt">Add</button>  
+        </div>
+
+        <div style="text-align: center; color: red; margin-top: 10px;">
+            {% if image_error %}
+                {{ image_error }}
+            {% endif %}
+        </div>
+
+        </form>
+    </div>
+    <div style="text-align: center; color: green; margin-top: 10px;">
+        {{msg}}
+    </div>
+</center>
+{% endblock %}

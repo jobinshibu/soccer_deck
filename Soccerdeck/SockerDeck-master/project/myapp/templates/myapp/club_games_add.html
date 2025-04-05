@@ -1,0 +1,40 @@
+{% extends 'myapp/club_base.html' %}
+{% load static %}
+{% block title %}Match Details Add{% endblock %}
+{% block body %}
+<center>
+    <h1>Match Details Add</h1>
+     <div class="container">
+    <form role="form" name="frm" action="{% url 'club_games_add'%}" method="post" >
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="game_name">Tournament Name :</label>
+            <input class="form-control" type="text" name="game_name" id="game_name">
+        </div>
+        <div class="form-group">
+            <label for="game_sub_name">Match Name :</label>
+            <input class="form-control" type="text" name="game_sub_name" id="game_sub_name">
+        </div>
+        <div class="form-group">
+            <label for="dt">Date :</label>
+            <input class="form-control" type="date" name="dt" id="dt">
+        </div>
+        <div class="form-group">
+            <label for="tm">Time :</label>
+            <input class="form-control" type="time" name="tm" id="tm">
+        </div>
+        <div class="form-group">
+            <label for="venue_details">Venue Details :</label>
+            <textarea class="form-control" name="venue_details" id="venue_details"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="result">Outcome :</label>
+            <input class="form-control" type="text" name="result" id="result">
+        </div>
+        <button type="submit" class="btn btn-info" id="bt" name="bt">Add</button>
+        <button type="reset" class="btn btn-info" id="rt" name="rt">Clear</button>
+    </form>
+     </div>
+    <h3>{{msg}}</h3>
+</center>
+{% endblock %}

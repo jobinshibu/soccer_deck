@@ -1,0 +1,42 @@
+{% extends 'myapp/user_base.html' %}
+{% load static %}
+{% block title %}Hello User!!!{% endblock %}
+{% block background %}{% endblock %}
+{% block body %}
+<style>
+    /* body {
+        background-image: url("{% static './myapp/images/mini-football.jpg' %}");
+    } */
+    td {
+        color: #000;
+    }
+</style>
+    <div class="container">
+    <h1 class="text-dark text-center mt-5 mb-4">Welcome {{ uname }}</h1>
+    <table class="tablecenterheadCSS table table-hover table-bordered table-sm">
+        <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Tournament</th>
+            <th>Match</th>
+            <th>Date / Time</th>
+            <th>Venue</th>
+            <th>Outcome</th>
+        </tr>
+        </thead>
+        {% for cm in match_list %}
+        <tbody>
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ cm.game_name }}</td>
+            <td>{{ cm.game_sub_name}}</td>
+            <td>{{ cm.dt}} | {{cm.tm}}</td>
+            <td>{{ cm.venue_details}}</td>
+            <td>{{ cm.result}}</td>
+          
+        </tr>
+        <tbody>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

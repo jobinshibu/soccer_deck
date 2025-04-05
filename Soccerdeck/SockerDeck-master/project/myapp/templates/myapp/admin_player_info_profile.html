@@ -1,0 +1,305 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}Player Details{% endblock %}
+{% block body %}
+<style>
+.tablecenterheadCSS th{
+	text-align:center;
+}
+.tablecenterheadCSS td{
+	text-align:center;
+}
+img.img-account-profile.rounded-circle.mb-2 {
+    max-width: 100%;
+    width: 100%;
+    max-height: 350px;
+}
+body {
+    background-color: #111;
+}
+.item {
+    justify-content: space-between;
+    padding: 0rem 0.25rem;
+    border-bottom: 1px solid rgb(180, 160, 160);
+}
+.item p {
+    margin: 0.25rem;
+}
+.col-lg-4 {
+    padding: 0.75rem;
+}
+.item {
+    color: #000;
+}
+.card-body {
+    color: #000;
+}
+</style>
+    <div class="container-xl px-4 mt-4">
+        <!-- Account page navigation-->
+               <div class="row">
+            <div class="col-xl-4">
+                <!-- Profile picture card-->
+                <div class="card mb-4 mb-xl-0">
+                    <div class="card-header text-dark">Player Picture</div>
+                    <div class="card-body text-center">
+                        <!-- Profile picture image-->
+                        <img class="img-account-profile rounded-circle mb-2" src="../static/myapp/media/{{player.pic_path }}" alt="">
+                        <h4>{{ player.fname  }} {{ player.lname  }}</h4>
+                        {% for k,value in country_list.items %}
+                            {% if k == player.country_id %}
+                                <p>{{ value  }}</p>
+                            {% endif %}
+			             {% endfor %}
+                        <!-- Profile picture help block-->
+                        <!-- Profile picture upload button-->
+                        <table class="tablecenterheadCSS table table-hover table-bordered table-md">
+                            <tr>
+                                <th>Height (Cm)</th>
+                                <th>{{ player.height_cm }}</th>
+                            </tr>
+                            <tr>
+                                <th>Weight (Kg)</th>
+                                <th>{{ player.weight_kg }}</th>
+                            </tr>
+                            <tr>
+                                <th>Overall</th>
+                                <th>{{ player.overall }}</th>
+                            </tr>
+                            <tr>
+                                <th>Positions</th>
+                                <th>{{ player.player_positions }}</th>
+                            </tr>
+                            <tr>
+                                <th>Week Foot</th>
+                                <th>{{ player.weak_foot }}</th>
+                            </tr>
+                            <tr>
+                                <th>Skill Moves</th>
+                                <th>{{ player.skill_moves }}</th>
+                            </tr>
+                          
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8">
+                <!-- Account details card-->
+                <div class="card mb-4">
+                    <div class="card-header text-dark">Player Details</div>
+                    <div class="card-body">
+                        <div class="row">
+                           
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                      <h5 class="card-title text-primary mb-0">Attacking</h5>
+                                      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                    </div>
+                                    <div class="card-body p-1">
+                                        <div class="item d-flex">
+                                            <p>Crossing</p>
+                                            <p>{{ player.attacking_crossing  }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Finishing</p>
+                                            <p>{{ player.attacking_finishing }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Head Accuracy</p>
+                                            <p>{{ player.attacking_heading_accuracy }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Short Passing</p>
+                                            <p>{{ player.attacking_short_passing }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Volleys</p>
+                                            <p>{{ player.attacking_volleys }}</p>
+                                        </div>
+                                    
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                      <h5 class="card-title text-primary mb-0">Skills</h5>
+                                      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                    </div>
+                                    <div class="card-body p-1">
+                                        <div class="item d-flex">
+                                            <p>Dribbling</p>
+                                            <p>{{ player.skill_dribbling }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Curve</p>
+                                            <p>{{ player.skill_curve }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Free Kick Accuracy</p>
+                                            <p>{{ player.skill_fk_accuracy }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Long Passing</p>
+                                            <p>{{ player.skill_long_passing }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Ball Control</p>
+                                            <p>{{ player.skill_ball_control }}</p>
+                                        </div>
+                                    
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                      <h5 class="card-title text-primary mb-0">Movement</h5>
+                                      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                    </div>
+                                    <div class="card-body p-1">
+                                        <div class="item d-flex">
+                                            <p>Acceleration</p>
+                                            <p>{{ player.movement_acceleration }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Sprint Speed</p>
+                                            <p>{{ player.movement_sprint_speed }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Agility</p>
+                                            <p>{{ player.movement_agility }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Reactions</p>
+                                            <p>{{ player.movement_reactions }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Balance</p>
+                                            <p>{{ player.movement_balance }}</p>
+                                        </div>
+                                    
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                      <h5 class="card-title text-primary mb-0">Power</h5>
+                                      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                    </div>
+                                    <div class="card-body p-1">
+                                        <div class="item d-flex">
+                                            <p>Shot</p>
+                                            <p>{{ player.power_shot_power }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Jumping</p>
+                                            <p>{{ player.power_jumping }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Stamina</p>
+                                            <p>{{ player.power_stamina }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Strength</p>
+                                            <p>{{ player.power_strength }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Long Shots</p>
+                                            <p>{{ player.power_long_shots }}</p>
+                                        </div>
+                                    
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                      <h5 class="card-title text-primary mb-0">Mentality</h5>
+                                      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                    </div>
+                                    <div class="card-body p-1">
+                                        <div class="item d-flex">
+                                            <p>Aggression</p>
+                                            <p>{{ player.mentality_aggression }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Interception</p>
+                                            <p>{{ player.mentality_interceptions }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Positioning</p>
+                                            <p>{{ player.mentality_positioning }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Vision</p>
+                                            <p>{{ player.mentality_vision }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Penalties</p>
+                                            <p>{{ player.mentality_penalties }}</p>
+                                        </div>                                 
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                      <h5 class="card-title text-primary mb-0">Goal Keeping</h5>
+                                      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                    </div>
+                                    <div class="card-body p-1">
+                                        <div class="item d-flex">
+                                            <p>Handling</p>
+                                            <p>{{ player.goalkeeping_handling }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Kicking</p>
+                                            <p>{{ player.goalkeeping_kicking }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Positioning</p>
+                                            <p>{{ player.goalkeeping_positioning }}</p>
+                                        </div>  
+                                        
+                                        <div class="item d-flex">
+                                            <p>Reflexes</p>
+                                            <p>{{ player.goalkeeping_reflexes }}</p>
+                                        </div>                                
+                                    </div>
+                                  </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                      <h5 class="card-title text-primary mb-0">Defending</h5>
+                                      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                    </div>
+                                    <div class="card-body p-1">
+                                        <div class="item d-flex">
+                                            <p>Marking</p>
+                                            <p>{{ player.defending_marking }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Standing Tackle</p>
+                                            <p>{{ player.defending_standing_tackle }}</p>
+                                        </div>
+                                        <div class="item d-flex">
+                                            <p>Sliding Tackle</p>
+                                            <p>{{ player.defending_sliding_tackle }}</p>
+                                        </div>                                
+                                    </div>
+                                  </div>
+                            </div>  
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

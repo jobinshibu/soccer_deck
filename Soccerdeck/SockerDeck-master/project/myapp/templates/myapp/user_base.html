@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <style>
+        body {
+            background-color: whitesmoke;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            color: black;
+            overflow-y: scroll; /* Enable vertical scrolling */
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh; /* Ensure the dashboard takes full height */
+        }
+
+        /* Left Sidebar */
+        .sidebar {
+            width: 250px; /* Fixed width for sidebar */
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 30px 20px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .sidebar h3 {
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #ecf0f1;
+        }
+
+        .sidebar a {
+            color: #bdc3c7;
+            text-decoration: none;
+            padding: 15px 0;
+            font-size: 1rem;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #34495e;
+            border-radius: 4px;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1; /* Take up remaining space */
+            margin-left: 250px; /* Align with the sidebar */
+            display: flex;
+            flex-direction: column; /* Stack children vertically */
+        }
+
+        /* Top Navbar */
+        .top-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            z-index: 1000;
+            width: calc(100% - 250px); /* Adjust width for sidebar */
+            top: 0;
+            left: 250px; /* Align with the sidebar */
+        }
+
+        /* Main Content Area */
+        .main-content {
+            margin-top: 80px; /* Height of the navbar */
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            flex-grow: 1; /* Allow to grow and take up available space */
+            padding: 20px; /* Add some padding to the main content area */
+        }
+
+        .content-box {
+            max-width: 1200px; /* Increase max-width for content */
+            min-width: 600px;
+            padding: 30px; /* Increase padding */
+            text-align: center; /* Center text */
+            border-radius: 8px; /* Optional: Rounded corners */
+            overflow: auto; /* Add overflow handling */
+        }
+
+        .content-box h1 {
+            color: black;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* Separator */
+        .separator {
+            margin: 0 10px; /* Space on both sides of the separator */
+            color: black; /* Color of the separator */
+            font-weight: bold; /* Make it a bit more prominent */
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #34495e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #2980b9;
+            border-radius: 10px;
+        }
+    </style>
+  </head>
+  <body {% block background %}{% endblock %}>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>{{ uname }}</h3>
+            <a href="{% url 'user_home' %}">Home</a>
+            <a href="{% url 'user_player_info_view' %}">Players</a>
+            <a href="{% url 'user_club_master_view' %}">Clubs</a>
+            <a href="{% url 'user_notifications_view' %}">Notifications</a>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="content-area">
+            <!-- Top Navbar -->
+            <div class="top-navbar">
+                <h4>SOCCER DECK&trade;</h4>
+                <div class="right-options">
+                    <a href="{% url 'user_changepassword' %}">Change Password</a>
+                    <span class="separator">|</span> <!-- Separator -->
+                    <a href="{% url 'user_logout' %}">Logout</a>
+                </div>
+            </div>
+
+            <!-- Main Content Block -->
+            <div class="main-content">
+                <div class="content-box">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>

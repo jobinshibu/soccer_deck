@@ -1,0 +1,11 @@
+Name,First Name,Last Name,Country,Image,Description,Age,Height(Cm),Weight,Overall Score,Player Positions,Weak Foot,Skill Moves ,Attacking Crossing,Attacking Finishing,Attacking Heading Accuracy,Attacking Short Passing,Attacking Volleys,Skill Dribbling ,Skill Curve,Skill Fk Accuracy,Skill Long Passing,Skill Ball Control,Movement Acceleration,Movement Sprint Speed,Movement Agility, Movement Reactions,Movement Balance,Power Shot Power,Power Jumping,Power Stamina,Power Strength,Power Long Shots,Mentality Aggression,Mentality Interceptions,Mentality Positioning,Mentality Vision,Mentality Penalties,Mentality Composure,Defending Marking,Defending Standing Tackle,Defending Sliding Tackle,Goalkeeping Diving,Goalkeeping Handling,Goalkeeping Kicking,Goalkeeping Positioning,Goalkeeping Reflexes,Estimate,Price
+
+
+
+fname,lname,country_id,document,descp,age,height_cm,weight_kg,overall,player_positions,weak_foot,skill_moves,attacking_crossing
+,attacking_finishing,attacking_heading_accuracy,attacking_short_passing,attacking_volleys,skill_dribbling,skill_curve
+,skill_fk_accuracy,skill_long_passing,skill_ball_control,movement_acceleration,movement_sprint_speed
+,movement_agility,movement_reactions,movement_balance,power_shot_power,power_jumping,power_stamina,power_strength,power_long_shots
+,mentality_aggression,mentality_interceptions,mentality_positioning,mentality_vision,mentality_penalties,mentality_composure
+,defending_marking,defending_standing_tackle,defending_sliding_tackle,goalkeeping_diving,goalkeeping_handling,
+goalkeeping_kicking,goalkeeping_positioning,goalkeeping_reflexes,estimate,price

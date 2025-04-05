@@ -1,0 +1,85 @@
+{% extends 'myapp/club_base.html' %}
+{% load static %}
+{% block background %}{% endblock %}
+{% block title %}Hello Club!!!{% endblock %}
+{% block body %}
+<div class="container">
+    <h1 class="mt-5">Notifications</h1> 
+    <span type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
+        Add New
+    </span>
+    <table class="tablecenterheadCSS table table-hover table-bordered table-md">
+        <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Heading</th>
+            <th>Content</th>
+            <th>URL</th>
+            <th>Date Created</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for item in notifications %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ item.heading }}</td>
+                <td>{{ item.content }}</td>
+                <td>{{ item.url }}</td>
+                <td>{{ item.date_added }}</td>
+                <td>
+                    <a href="club_delete_notification?id={{item.id}}">
+                        <button class="btn btn-danger">Delete</button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Notification</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="" method="post"> 
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="heading">Heading</label>
+                            <input name="heading" type="text" class="form-control" id="heading" value="{{ heading }}" required>
+                        </div>                    
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="url">URL</label>
+                            <input name="url" type="url" class="form-control" id="url" value="{{ url }}" required>
+                        </div>                    
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Content</label>
+                            <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" required>{{ content }}</textarea>
+                        </div>                  
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add Notification</button>
+                </div>
+                {% if messages %}
+                    <div class="alert alert-danger text-center">
+                        {{ messages }}
+                    </div>
+                {% endif %}
+            </form>
+          </div>
+        </div>
+      </div>
+</div>
+{% endblock %}

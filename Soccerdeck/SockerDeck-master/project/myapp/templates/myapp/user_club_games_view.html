@@ -1,0 +1,54 @@
+{% extends 'myapp/user_base.html' %}
+{% load static %}
+{% block title %}club Match Details{% endblock %}
+{% block body %}
+<style>
+.tablecenterheadCSS th{
+	text-align:center;
+}
+.tablecenterheadCSS td{
+	text-align:center;
+}
+</style>
+
+<center>
+
+    <h1>Club Match Details</h1>
+    <div class="container">
+    <form role="form" name="frm" action="{% url 'club_games_view'%}" method="post">
+        {% csrf_token %}
+        <div class="table-responsive-lg">
+        <table class="tablecenterheadCSS table table-hover table-bordered table-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Tournament</th>
+                <th>Match</th>
+                <th>Date / Time</th>
+                <th>Venue</th>
+                <th>Outcome</th>
+
+            </tr>
+            </thead>
+            {% for cm in match_list %}
+            <tbody>
+            <tr>
+                <td>{{ cm.id }}</td>
+                <td>{{ cm.game_name }}</td>
+                <td>{{ cm.game_sub_name}}</td>
+                <td>{{ cm.dt}} | {{cm.tm}}</td>
+                <td>{{ cm.venue_details}}</td>
+                <td>{{ cm.result}}</td>
+
+            </tr>
+            <tbody>
+            {% endfor %}
+        </table>
+        </div>
+
+    </form>
+    </div>
+    <b>{{msg}}</b>
+</center>
+
+{% endblock %}

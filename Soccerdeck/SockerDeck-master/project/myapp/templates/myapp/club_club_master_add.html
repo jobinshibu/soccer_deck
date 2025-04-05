@@ -1,0 +1,263 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %}Club Details Add{% endblock %}
+
+{% block navbar %}
+  {{ block.super }}  <!-- This will include only the navbar defined in base.html -->
+{% endblock %}
+
+<!-- Override hero, about, and contact blocks to exclude them from the page -->
+{% block hero %}{% endblock %}
+{% block about %}{% endblock %}
+{% block contact %}{% endblock %}
+
+{% block background %}
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh; /* Ensure body takes full screen height */
+        display: flex;
+        flex-direction: column;
+        background-image: url("{% static './myapp/images/bg_lo.jpeg' %}");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    .form-container {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .registration-form {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 800px; /* Adjust the max width for a smaller form */
+    }
+
+    .registration-form h1 {
+        margin-bottom: 30px;
+        font-size: 28px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 15px; /* Spacing between form fields */
+    }
+
+    .form-label {
+        margin-bottom: 5px;
+        display: block;
+        font-weight: bold;
+    }
+
+    .form-control {
+        margin-top: 5px; /* Spacing between label and input */
+    }
+
+    .error-message {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .col-md-4 {
+        flex-basis: 30%; /* Adjust label column width */
+    }
+
+    .col-md-8 {
+        flex-basis: 65%; /* Adjust input column width */
+    }
+
+    .btn-info {
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .btn-info:hover {
+        background-color: #0056b3;
+    }
+
+    .row.mt-3 {
+        margin-top: 20px;
+    }
+
+    /* Footer styling */
+    footer {
+        padding: 20px 0; /* Adjust the top and bottom padding */
+        text-align: center;
+        width: 100%; /* Use 100% to avoid horizontal scrollbar */
+        position: relative; /* Fixed position */
+        bottom: 0;
+        left: 0;
+        background-color: transparent !important; /* Transparent background */
+        color: white !important; /* Black text for visibility */
+    }
+
+    footer a {
+        color: red;
+        text-decoration: underline;
+    }
+
+    footer a:hover {
+        color: darkred;
+    }
+
+    /* Force footer to the bottom of the page */
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .form-container {
+        flex-grow: 1; /* Push footer to the bottom */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <div class="registration-form">
+        <h1>Club Details Add</h1>
+        <form role="form" name="frm" action="{% url 'club_club_master_add' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label for="club_name" class="form-label">Name:</label>
+                </div>
+                <div class="col-md-8">
+                    <input class="form-control" type="text" name="club_name" id="club_name" required value="{{ request.POST.club_name|default:'' }}">
+                    {% if errors.club_name %}
+                        <div class="error-message">{{ errors.club_name }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label for="document" class="form-label">Image:</label>
+                </div>
+                <div class="col-md-8">
+                    <input class="form-control" type="file" name="document" id="document" required>
+                    {% if errors.document %}
+                        <div class="error-message">{{ errors.document }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label for="c_descp" class="form-label">Description:</label>
+                </div>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="c_descp" id="c_descp" required>{{ request.POST.c_descp|default:'' }}</textarea>
+                    {% if errors.c_descp %}
+                        <div class="error-message">{{ errors.c_descp }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label for="addr" class="form-label">Address:</label>
+                </div>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="addr" id="addr" required>{{ request.POST.addr|default:'' }}</textarea>
+                    {% if errors.addr %}
+                        <div class="error-message">{{ errors.addr }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label for="owner_details" class="form-label">Owner Details:</label>
+                </div>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="owner_details" id="owner_details" required>{{ request.POST.owner_details|default:'' }}</textarea>
+                    {% if errors.owner_details %}
+                        <div class="error-message">{{ errors.owner_details }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label for="url" class="form-label">URL:</label>
+                </div>
+                <div class="col-md-8">
+                    <input class="form-control" type="text" name="url" id="url" required value="{{ request.POST.url|default:'' }}">
+                    {% if errors.url %}
+                        <div class="error-message">{{ errors.url }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label for="uname" class="form-label">User Name:</label>
+                </div>
+                <div class="col-md-8">
+                    <input class="form-control" type="text" name="uname" id="uname" required value="{{ request.POST.uname|default:'' }}">
+                    {% if errors.uname %}
+                        <div class="error-message">{{ errors.uname }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label for="password" class="form-label">Password:</label>
+                </div>
+                <div class="col-md-8">
+                    <input class="form-control" type="password" name="password" id="password" required>
+                    {% if errors.password %}
+                        <div class="error-message">{{ errors.password }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-info w-100" id="bt" name="bt">Add</button>
+                </div>
+                <div class="col-md-6">
+                    <button type="reset" class="btn btn-info w-100" id="rt" name="rt">Clear</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Handle form messages -->
+<div>
+    <h3>{{ msg }}</h3>
+</div>
+
+<!-- Privacy policy footer -->
+<footer>
+    <p>&copy; 2024 SoccerDeck&trade;. All Rights Reserved.</p>
+    <p><a href="{% url 'privacy_policy' %}">Privacy Policy</a></p>
+</footer>
+
+{% endblock %}

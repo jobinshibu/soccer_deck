@@ -1,0 +1,25 @@
+{% extends 'myapp/base.html' %}
+
+{% load static %}
+{% block title %}
+SoccerDeck&trade;
+{% endblock %}
+{% block background %}
+<style>
+    body {
+        background-image: url("{% static './myapp/images/bg_11.png' %}");  /* Ensure the correct image path */
+        background-size: cover;          /* Ensure the image covers the entire screen */
+        background-position: center;     /* Center the background image */
+        background-repeat: no-repeat;    /* Do not repeat the image */
+        background-attachment: fixed;    /* Keep the background fixed while scrolling */
+        margin: 0;
+        padding: 0;
+        height: 100vh;                   /* Full height of the viewport */
+    }
+</style>
+{% endblock %}
+{% block body %}
+<center>
+    <!--<img src="{% static './myapp/images/ball.jpg' %}" width="600" height="400"> -->
+</center>
+{% endblock %}

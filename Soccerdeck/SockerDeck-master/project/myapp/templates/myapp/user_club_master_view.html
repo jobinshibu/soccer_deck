@@ -1,0 +1,56 @@
+{% extends 'myapp/user_base.html' %}
+{% load static %}
+{% block title %}Club Details{% endblock %}
+{% block body %}
+<style>
+.tablecenterheadCSS th{
+	text-align:center;
+}
+.tablecenterheadCSS td{
+	text-align:center;
+}
+</style>
+
+<center>
+
+    <h1>Club Details</h1>
+    <div class="container">
+    <form role="form" name="frm" action="{% url 'user_club_master_view'%}" method="post">
+        {% csrf_token %}
+        <div class="table-responsive-lg">
+        <table class="tablecenterheadCSS table table-hover table-bordered table-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Address</th>
+                <th>Owner</th>
+                <th>URL</th>
+                <th>Date / Time</th>
+            </tr>
+            </thead>
+            {% for cm in club_list %}
+            <tbody>
+            <tr>
+                <td>{{ cm.id }}</td>
+                <td>{{ cm.club_name }}</td>
+                <td><embed src="../static/myapp/media/{{ cm.c_flag }}" width="100" height="100"></embed></td>
+                <td>{{ cm.c_descp}}</td>
+                <td>{{ cm.addr}}</td>
+                <td>{{ cm.owner_details}}</td>
+                <td>{{ cm.url}}</td>
+                <td>{{ cm.dt }} / {{ cm.tm }}</td>
+            </tr>
+            <tbody>
+            {% endfor %}
+        </table>
+        </div>
+
+    </form>
+    </div>
+    <b>{{msg}}</b>
+</center>
+
+{% endblock %}

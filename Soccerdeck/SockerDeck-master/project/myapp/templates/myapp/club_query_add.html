@@ -1,0 +1,99 @@
+{% extends 'myapp/club_base.html' %}
+{% load static %}
+{% block title %}Player Value Estimation{% endblock %}
+{% block body %}
+{% if msg %}
+<script>
+    $(document).ready(function () {
+        swal({
+            title: "Evaluated!",
+            text: "{{msg}}: €{{estimate}}",
+            icon: "info",
+        }).then((value) => {
+            swal({
+                title: "Evaluated!",
+                text: "{{msg2}}: {{overall}}",
+                icon: "info",
+            });
+        });
+    })
+</script>
+{% endif %}
+<div class="container mt-3">
+    <h2 class="mb-3"><font color="#366092"> Evaluate</font></h2>
+
+    <form name="frm" action="{% url 'club_query_add' %}" method="post">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Passing</label>
+                    <input type="number" min="1" max="100" class="form-control form-control-lg" name="passing" required="required">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Attacking Short Passing</label>
+                    <input type="number" min="1" max="100" class="form-control form-control-lg" name="attacking_short_passing" required="required">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Skill Dribbling</label>
+                    <input type="number" min="1" max="100" class="form-control form-control-lg" name="skill_dribbling" required="required">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Skill Long Passing</label>
+                    <input type="number" min="1" max="100" class="form-control form-control-lg" name="skill_long_passing" required="required">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Movement Reactions</label>
+                    <input type="number" min="1" max="100" class="form-control form-control-lg" name="movement_reactions" required="required">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Power Shot Power</label>
+                    <input type="number" min="1" max="100" class="form-control form-control-lg" name="power_shot_power" required="required">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Shooting</label>
+                    <input type="number" min="1" max="100" class="form-control form-control-lg" name="shooting" required="required">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Mentality Vision</label>
+                    <input type="number" min="1" max="100" class="form-control form-control-lg" name="mentality_vision" required="required">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Mentality Composure</label>
+                    <input type="number" min="1" max="100" class="form-control form-control-lg" name="mentality_composure" required="required">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Goalkeeping Diving</label>
+                    <input type="number" min="1" max="100" class="form-control form-control-lg" name="goalkeeping_diving" required="required">
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary btn-lg">SUBMIT</button>
+        </div>
+    </form>
+</div>
+<h2>{{msg}} {{estimate}}</h2>
+<h2>{{msg2}} {{overall}}</h2>
+
+<style>
+    .form-control {
+        height: calc(2.5rem + 2px);  /* Adjust height */
+        font-size: 1rem;            /* Adjust font size */
+        padding: 0.5rem;              /* Adjust padding */
+        border-radius: 0.5rem;        /* Rounded corners */
+        border: 1px solid #ced4da;    /* Border color */
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;     /* Adjust padding */
+        font-size: 1.1rem;            /* Adjust font size */
+        border-radius: 0.5rem;        /* Rounded corners */
+    }
+</style>
+{% endblock %}

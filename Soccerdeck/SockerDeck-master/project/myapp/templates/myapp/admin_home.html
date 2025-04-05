@@ -1,0 +1,123 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block background %}{% endblock %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block body %}
+<style>
+    .main{ 
+        margin-top: -60px; /* Adjust this value to move content up */
+    }
+    .dashboard-cards {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        width: 300px;
+        margin: 10px;
+        background-color: #ffffff; /* Light background */
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Deeper shadow */
+        border-radius: 12px; /* Rounded corners */
+        transition: transform 0.3s, box-shadow 0.3s; /* Animation for hover effects */
+    }
+
+    .card:hover {
+        transform: translateY(-5px); /* Slight lift on hover */
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
+    }
+
+    .card-body {
+        text-align: center;
+        padding: 30px; /* More padding for spacious look */
+    }
+
+    .card h5 {
+        font-size: 1.5rem;
+        margin-bottom: 15px; /* Increased margin */
+        color: #333; /* Darker text color */
+        font-weight: bold; /* Bold text */
+    }
+
+    .card p {
+        font-size: 2.5rem; /* Larger font for counts */
+        color: #2980b9; /* Blue color for counts */
+        margin: 0; /* Remove default margin */
+    }
+
+    .chart-container {
+        margin-top: 20rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    canvas {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .spacer{
+        height: 30px;
+    }
+</style>
+
+<div class="main">
+    <h1></h1>
+</div>
+
+<!-- Dashboard Cards -->
+<div class="dashboard-cards">
+    <div class="card">
+        <div class="card-body">
+            <h5>Clubs</h5>
+            <p>{{ club_count }}</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5>Users</h5>
+            <p>{{ user_count }}</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5>Players</h5>
+            <p>{{ player_count }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="spacer"></div>
+
+<!-- Chart Section -->
+<div class="chart-container" style="max-width: 600px; margin: auto;"> <!-- Set max-width for container -->
+    <canvas id="clubParticipationChart" width="400" height="230"></canvas> <!-- Adjust width and height -->
+</div>
+
+<!-- JavaScript for Charts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('clubParticipationChart').getContext('2d');
+    var clubParticipationChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ club_names|safe }}, // Ensure this is in the right format
+            datasets: [{
+                label: 'Players per Club',
+                data: {{ player_counts|safe }}, // Ensure this is in the right format
+                backgroundColor: '#3498db',
+                borderColor: '#2980b9',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

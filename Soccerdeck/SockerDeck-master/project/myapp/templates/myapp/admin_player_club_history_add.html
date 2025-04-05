@@ -1,0 +1,33 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}Player Club Details Add{% endblock %}
+{% block body %}
+<center>
+    <h1>Player Club Details Add</h1>
+     <div class="container">
+    <form role="form" name="frm" action="{% url 'admin_player_club_history_add'%}" method="post" >
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="curr_status">Name :</label>
+            <input class="form-control" type="text" name="curr_status" id="curr_status">
+        </div>
+        <div class="form-group">
+            <label for="descp">Description :</label>
+            <textarea class="form-control" name="descp" id="descp"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="fr_dt">From Date :</label>
+            <input class="form-control" type="date" name="fr_dt" id="fr_dt">
+        </div>
+         <div class="form-group">
+            <label for="to_dt">To Date :</label>
+            <input class="form-control" type="date" name="to_dt" id="to_dt">
+        </div>
+        <input class="form-control" type="hidden" name="player_id" id="player_id" value="{{player_id}}">
+        <button type="submit" class="btn btn-info" id="bt" name="bt">Add</button>
+        <button type="reset" class="btn btn-info" id="rt" name="rt">Clear</button>
+    </form>
+     </div>
+    <h3>{{msg}}</h3>
+</center>
+{% endblock %}

@@ -1,0 +1,149 @@
+{% extends 'myapp/user_base.html' %}
+{% load static %}
+{% block title %}Club Player Details{% endblock %}
+{% block body %}
+<style>
+.tablecenterheadCSS th{
+	text-align:center;
+}
+.tablecenterheadCSS td{
+	text-align:center;
+}
+</style>
+
+<center>
+
+    <h1>Club Player Details</h1>
+    <div class="container">
+    <form role="form" name="frm" action="{% url 'club_player_view'%}" method="post">
+        {% csrf_token %}
+        <div class="table-responsive-lg">
+        <table class="tablecenterheadCSS table table-hover table-bordered table-md">
+            <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Age</th>
+                <th>Height(Cm)</th>
+                <th>Weight</th>
+                <th>Overall Score</th>
+                <th>Player Positions</th>
+                <th>Weak Foot</th>
+                <th>Skill Moves</th>
+                <th>Attacking Crossing</th>
+                <th>Attacking Finishing</th>
+                <th>Attacking Heading Accuracy</th>
+                <th>Attacking Short Passing</th>
+                <th>Attacking Volleys</th>
+                <th>Skill Dribbling</th>
+                <th>Skill Curve</th>
+                <th>Skill Fk Accuracy</th>
+                <th>Skill Long Passing</th>
+                <th>Skill Ball Control</th>
+                <th>Movement Acceleration</th>
+                <th>Movement Sprint Speed</th>
+                <th>Movement Agility</th>
+                <th>Movement Reactions</th>
+                <th>Movement Balance</th>
+                <th>Power Shot Power</th>
+                <th>Power Jumping</th>
+                <th>Power Stamina</th>
+                <th>Power Strength</th>
+                <th>Power Long Shots</th>
+                <th>Mentality Aggression</th>
+                <th>Mentality Interceptions</th>
+                <th>Mentality Positioning</th>
+                <th>Mentality Vision</th>
+                <th>Mentality Penalties</th>
+                <th>Mentality Composure</th>
+                <th>Defending Marking</th>
+                <th>Defending Standing Tackle</th>
+                <th>Defending Sliding Tackle</th>
+                <th>Goalkeeping Diving</th>
+                <th>Goalkeeping Handling</th>
+                <th>Goalkeeping Kicking</th>
+                <th>Goalkeeping Positioning</th>
+                <th>Goalkeeping Reflexes</th>
+                <th>Estimate</th>
+                <th>Price</th>
+                <th>Date / Time</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            {% for pi in player_list %}
+            <tbody>
+            <tr>
+                <td>{{ pi.id }}</td>
+                <td>{{ pi.fname }} / {{ pi.lname }}</td>
+                {% for k,value in country_list.items %}
+                    {% if k == pi.country_id %}
+					    <td>{{ value }}</td>
+				    {% endif %}
+			    {% endfor %}
+                <td><embed src="../static/myapp/media/{{ pi.pic_path }}" width="100" height="100"></embed></td>
+                <td>{{ pi.descp}}</td>
+                <td>{{ pi.age}}</td>
+                <td>{{ pi.height_cm}}</td>
+                <td>{{ pi.weight_kg}}</td>
+                <td>{{ pi.overall}}</td>
+                <td>{{ pi.player_positions}}</td>
+                <td>{{ pi.weak_foot}}</td>
+                <td>{{ pi.skill_moves}}</td>
+                <td>{{ pi.attacking_crossing}}</td>
+                <td>{{ pi.attacking_finishing}}</td>
+                <td>{{ pi.attacking_heading_accuracy}}</td>
+                <td>{{ pi.attacking_short_passing}}</td>
+                <td>{{ pi.attacking_volleys}}</td>
+                <td>{{ pi.skill_dribbling}}</td>
+                <td>{{ pi.skill_curve}}</td>
+                <td>{{ pi.skill_fk_accuracy}}</td>
+                <td>{{ pi.skill_long_passing}}</td>
+                <td>{{ pi.skill_ball_control}}</td>
+                <td>{{ pi.movement_acceleration}}</td>
+                <td>{{ pi.movement_sprint_speed}}</td>
+                <td>{{ pi.movement_agility}}</td>
+                <td>{{ pi.movement_reactions}}</td>
+                <td>{{ pi.movement_balance}}</td>
+                <td>{{ pi.power_shot_power}}</td>
+                <td>{{ pi.power_jumping}}</td>
+                <td>{{ pi.power_stamina}}</td>
+                <td>{{ pi.power_strength}}</td>
+                <td>{{ pi.power_long_shots}}</td>
+                <td>{{ pi.mentality_aggression}}</td>
+                <td>{{ pi.mentality_interceptions}}</td>
+                <td>{{ pi.mentality_positioning}}</td>
+                <td>{{ pi.mentality_vision}}</td>
+                <td>{{ pi.mentality_penalties}}</td>
+                <td>{{ pi.mentality_composure}}</td>
+                <td>{{ pi.defending_marking}}</td>
+                <td>{{ pi.defending_standing_tackle}}</td>
+                <td>{{ pi.defending_sliding_tackle}}</td>
+                <td>{{ pi.goalkeeping_diving}}</td>
+                <td>{{ pi.goalkeeping_handling}}</td>
+                <td>{{ pi.goalkeeping_kicking}}</td>
+                <td>{{ pi.goalkeeping_positioning}}</td>
+                <td>{{ pi.goalkeeping_reflexes}}</td>
+                <td>{{ pi.estimate}}</td>
+                <td>{{ pi.price}}</td>
+                <td>{{ pi.dt }} / {{ pi.tm }}</td>
+                <td>
+                    <a href="../club_player_club_history_view?player_id={{ pi.id }}">Career</a> |
+                    <a href="../club_player_match_history_view?player_id={{ pi.id }}">Matches</a>
+
+                </td>
+            </tr>
+            <tbody>
+            {% endfor %}
+        </table>
+        </div>
+
+    </form>
+
+    </div>
+    <b>{{msg}}</b>
+</center>
+
+{% endblock %}

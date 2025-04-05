@@ -1,0 +1,28 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}Country Add{% endblock %}
+{% block body %}
+<center>
+    <h1>Country Add</h1>
+     <div class="container">
+    <form role="form" name="frm" action="{% url 'admin_country_master_add'%}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="country">Name :</label>
+            <input class="form-control" type="text" name="country" id="country">
+        </div>
+        <div class="form-group">
+            <label for="document">Flag :</label>
+            <input class="form-control" type="file" name="document" id="document">
+        </div>
+        <div class="form-group">
+            <label for="budget">Budget: </label>
+            <input class="form-control" type="number" name="budget" id="budget">
+        </div>
+       <button type="submit" class="btn btn-info" id="bt" name="bt">Add</button>
+        <button type="reset" class="btn btn-info" id="rt" name="rt">Clear</button>
+    </form>
+     </div>
+    <b>{{msg}}</b>
+</center>
+{% endblock %}

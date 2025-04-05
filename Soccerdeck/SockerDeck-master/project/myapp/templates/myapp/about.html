@@ -1,0 +1,13 @@
+{% extends 'myapp/base.html' %}
+{% block hero %}{% endblock %}
+
+{% load static %}
+{% block title %}
+About Us
+{% endblock %}
+{% block body %}
+<center>
+    <img src="{% static './myapp/images/about-us.png' %}" width="300" height="300">
+</center>
+
+{% endblock %}

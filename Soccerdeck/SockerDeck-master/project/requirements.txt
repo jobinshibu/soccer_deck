@@ -1,0 +1,4 @@
+django
+numpy
+pandas
+sklearn

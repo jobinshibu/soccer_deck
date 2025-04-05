@@ -1,0 +1,71 @@
+{% extends 'myapp/user_base.html' %}
+{% load static %}
+{% block title %}Player Details{% endblock %}
+{% block body %}
+<style>
+.tablecenterheadCSS th{
+	text-align:center;
+}
+.tablecenterheadCSS td{
+	text-align:center;
+}
+</style>
+
+<center>
+
+    <h1 class="mt-5 mb-3">Players</h1>
+    <div class="container">
+    <form role="form" name="frm" action="{% url 'user_player_info_view'%}" method="post">
+        {% csrf_token %}
+        <div class="table-responsive-lg">
+            <table class="tablecenterheadCSS table table-hover table-bordered table-md">
+                <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Country</th>
+                    <th>Current Club</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Age</th>
+                    <th>Action</th> 
+                </tr>
+                </thead>
+                {% for pi in player_list %}
+                <tbody>
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ pi.fname }} {{ pi.lname }}</td>
+                    {% for k,value in country_list.items %}
+                        {% if k == pi.country_id %}
+                            <td>{{ value }}</td>
+                        {% endif %}
+                    {% endfor %}
+                    <td>{{ pi.club.club_name }}</td>
+                    <td><embed src="../static/myapp/media/{{ pi.pic_path }}" width="100" height="100"></embed></td>
+                    <td>{{ pi.descp}}</td>
+                    <td>{{ pi.age}}</td>
+                <td>
+                    <a href="../user_player_club_history_view?player_id={{ pi.id }}">
+                        <button type="button" class="btn btn-primary">Club History</button>
+                    </a> |
+                    <a href="../user_player_match_history_view?player_id={{ pi.id }}">
+                        <button type="button" class="btn btn-primary">Match History</button>
+                    </a>
+                    | <a href="../user_player_info_profile?id={{ pi.id }}">
+                        <button type="button" class="btn btn-primary">View Info</button>
+                    </a>
+
+                </td>
+            </tr>
+            <tbody>
+            {% endfor %}
+        </table>
+        </div>
+
+    </form>
+    </div>
+    <b>{{msg}}</b>
+</center>
+
+{% endblock %}

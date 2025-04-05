@@ -1,0 +1,163 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block title %}
+    Admin Login
+{% endblock %}
+
+<!-- Include only the navbar from base.html -->
+{% block navbar %}
+  {{ block.super }}
+{% endblock %}
+
+{% block hero %}{% endblock %}
+{% block about %}{% endblock %}
+{% block contact %}{% endblock %}
+
+{% block background %}
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background-image: url("{% static './myapp/images/bg_lo.jpeg' %}");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    .login-container {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .login-form {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .login-form h1 {
+        margin-bottom: 30px;
+        font-size: 24px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        padding: 12px;
+        border-radius: 5px;
+    }
+
+    .btn-info {
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 5px;
+        padding: 10px 20px;
+        width: 100%;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: #fff;
+        border-radius: 5px;
+        padding: 10px 20px;
+        width: 100%;
+    }
+
+    footer {
+        background-color: transparent !important;
+        color: white !important;
+        padding: 5px 0;
+        text-align: center;
+        width: 100%;
+        position: relative;
+        bottom: 0;
+        left: 0;
+    }
+
+    footer a {
+        color: red !important;
+        text-decoration: underline;
+    }
+
+    footer a:hover {
+        color: darkred !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-form">
+        <h1>Admin Login</h1>
+        <form role="form" name="frm" method="post" action="{% url 'admin_login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="un">User Name:</label>
+                <input class="form-control" type="text" name="un" id="un" required>
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input class="form-control" type="password" name="pwd" id="pwd" required>
+            </div>
+            <button type="submit" class="btn btn-info" id="bt" name="bt">Login</button>
+            <button type="reset" class="btn btn-secondary" id="rt" name="rt">Reset</button>
+        </form>
+    </div>
+</div>
+
+<!-- Privacy policy footer -->
+<footer>
+    <p>&copy; 2024 SoccerDeck&trade;. All Rights Reserved.</p>
+    <p><a href="{% url 'privacy_policy' %}">Privacy Policy</a></p>
+</footer>
+
+<!-- Include SweetAlert2 for popup messages -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Include any relevant scripts -->
+<script src="{% static 'myapp/scripts/loginscript.js' %}"></script>
+
+<!-- JavaScript for popup and redirect -->
+<script>
+    // Check if there is an error or success message
+    {% if msg1 %}
+        // Show error popup
+        Swal.fire({
+            icon: 'error',
+            title: 'Login Failed',
+            text: '{{ msg1 }}',
+            confirmButtonColor: '#007bff'
+        });
+    {% elif success_message %}
+        // Show success popup and redirect
+        Swal.fire({
+            icon: 'success',
+            title: 'Login Successful',
+            text: '{{ success_message }}',
+            confirmButtonColor: '#007bff'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect to admin home
+                window.location.href = "{% url 'admin_home' %}";
+            }
+        });
+    {% endif %}
+</script>
+{% endblock %}
